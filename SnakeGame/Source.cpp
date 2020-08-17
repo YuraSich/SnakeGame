@@ -17,10 +17,11 @@ void init(void)
 void processNormalKeys(unsigned char key, int x, int y) {
 
 	if (key == 0x1B)
-		
+		//TODO Add exit func and window close
+		;
 }
 
-
+//TODO Need t ofind a way to hide console when window opens
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
