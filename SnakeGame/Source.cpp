@@ -24,7 +24,7 @@ void processNormalKeys(unsigned char key, int x, int y) {
 
 	if (key == 0x1B) {
 		glutDestroyWindow(MainWindow.id);
-		//TerminateProcess();
+		exit(0);
 	}
 }
 
