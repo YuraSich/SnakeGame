@@ -1,4 +1,10 @@
 #include "Game.h"
+#include "WindowStruct.h"
+
+#include <Windows.h>
+
+
+static Window MainWindow{ 0,0,0 };
 
 void display(void)
 {
@@ -16,26 +22,26 @@ void init(void)
 
 void processNormalKeys(unsigned char key, int x, int y) {
 
-	if (key == 0x1B)
-		//TODO Add exit func and window close
-		;
+	if (key == 0x1B) {
+		glutDestroyWindow(MainWindow.id);
+		//TerminateProcess();
+	}
 }
 
-//TODO Need t ofind a way to hide console when window opens
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
-	int win_w = glutGet(GLUT_SCREEN_WIDTH);
-	int win_h = glutGet(GLUT_SCREEN_HEIGHT);
+	MainWindow.width = glutGet(GLUT_SCREEN_WIDTH);
+	MainWindow.height = glutGet(GLUT_SCREEN_HEIGHT);
+	MainWindow.id = glutCreateWindow("Snake");
+	
+	auto game = new Game(MainWindow.height, MainWindow.width);
 
-	auto game = new Game(win_h, win_w);
-
-	glutCreateWindow("Snake");
 	glutFullScreen();
 	init();
-
+	ShowWindow(GetConsoleWindow(), SW_HIDE); // Hide console
 	glutDisplayFunc(display);
 	glutKeyboardFunc(processNormalKeys);
 
