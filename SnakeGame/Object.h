@@ -8,8 +8,7 @@ class Object
 
 public:
 	Object(int x, int y);
-	~Object();
-	virtual void Draw();
+	virtual void Draw() = 0;
 };
 
 
@@ -20,7 +19,6 @@ private:
 	std::vector<Object*> tail;
 public:
 	Snake(int x, int y);
-	~Snake();
 	virtual void Draw();
 };
 
