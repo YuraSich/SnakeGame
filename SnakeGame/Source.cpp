@@ -4,7 +4,7 @@
 #include <Windows.h>
 
 
-static Window MainWindow{ 0,0,0 };
+static Window MainWindow;
 
 void display(void)
 {
