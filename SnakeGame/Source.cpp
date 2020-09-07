@@ -1,13 +1,17 @@
 #include "Game.h"
 #include "WindowStruct.h"
+#include <memory>
 
 #include <Windows.h>
 
 
 static Window MainWindow;
-
+static std::unique_ptr<Game> game;
+ 
 void display(void)
 {
+	glClear(GL_COLOR_BUFFER_BIT);
+	game->Draw();
 	glutSwapBuffers();
 }
 
@@ -17,7 +21,7 @@ void init(void)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
+	glOrtho(0.0f, MainWindow.width, MainWindow.height, 0.0f, 0.0f, 1.0f);
 }
 
 void processNormalKeys(unsigned char key, int x, int y) {
@@ -37,14 +41,14 @@ int main(int argc, char** argv)
 	MainWindow.height = glutGet(GLUT_SCREEN_HEIGHT);
 	MainWindow.id = glutCreateWindow("Snake");
 	
-	auto game = new Game(MainWindow.height, MainWindow.width);
-
+	game = std::make_unique<Game>(Game(MainWindow.height, MainWindow.width));
+	
 	glutFullScreen();
 	init();
 	ShowWindow(GetConsoleWindow(), SW_HIDE); // Hide console
 	glutDisplayFunc(display);
 	glutKeyboardFunc(processNormalKeys);
-
+	
 	glutMainLoop();
 	return 0;
 }

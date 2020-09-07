@@ -4,14 +4,17 @@
 class Game
 {
 public:
-	Game(int height, int wifth); // height, width
+	Game(int, int); // height, width
 	~Game();
 
 	int GetWindowHeight();
 	int GetWindowWidth();
+	void Draw();
 
 private:
-	int window_height;
-	int window_width;
+	int windowHeight;
+	int windowWidth;
+	int gameFieldSize;
+	int gameFieldScale;
 
 };
