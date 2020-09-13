@@ -13,5 +13,5 @@ Snake::Snake(int x, int y) : Object(x,y) {
 
 void Snake::Draw()
 {
-	;
+	//Draw head
 }
